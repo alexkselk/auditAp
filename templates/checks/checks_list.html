@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Checks list</title>
+    <style>
+        td {
+            border: 0.5px solid black;
+        }
+    </style>
+</head>
+<body>
+    <div></div>
+
+    <a href="{%  url 'check_new' %}">New check</a>
+    <h1>Checks list</h1>
+    <table>
+        {% for check in checks %}
+            <tr>
+                <td>{{ check.pk }}</td>
+                <td>{{ check.author }}</td>
+                <td><a href="{% url 'check_details' pk=check.pk %}">{{ check.title }}</a></td>
+                <td>{{ check.reason }}</td>
+                <td>{{ check.init_date }}</td>
+                <td>{{ check.test_field }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

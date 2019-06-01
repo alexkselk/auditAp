@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <form action="upload" method="POST">
+        {% csrf_token %}
+
+        <input type="file"><br/>
+        <input type="text" name="x"/>
+        <input type="submit" value="Upload it!!!" id="ufile" name="ufile"> <br/>
+
+    </form>
+</body>
+</html>

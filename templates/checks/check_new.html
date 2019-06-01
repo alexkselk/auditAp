@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>New ceck</title>
+</head>
+<body>
+    <a href="{%  url 'checks_list' %}">Назад к списку</a>
+
+    <h1>New check</h1>
+    <form action="{% url 'check_new'%}" method="post">
+        {%  csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Save</button>
+    </form>
+</body>
+</html>
