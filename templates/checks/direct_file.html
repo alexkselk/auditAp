@@ -6,14 +6,13 @@
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="{% static 'css/mystyle.css' %}">
 
-    <link rel="stylesheet" href="{% static 'css/mystyle.css' %}"> <!-- нужен ли? -->
+    <link rel="stylesheet" href="{% static 'style/mystyle.css' %}"> <!-- нужен ли? -->
 
-    <script type="text/javascript" src="{% static 'js/features.js' %}"></script>
+
     <meta charset="UTF-8">
     <title>Assessor's helper</title>
-    
+
 </head>
 
 <body>
@@ -50,5 +49,8 @@
         <p>File uploaded at: <a href="{{ uploaded_file_url }}">{{ uploaded_file_url }}</a></p>
     {%  endif %}
 
+<script type="text/javascript" src="{% static 'js/features.js' %}"></script>
 </body>
+
 </html>
+
