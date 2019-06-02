@@ -30,7 +30,7 @@
     <hr>
 
 
-    <form class="container-fluid" method="POST" enctype="multipart/form-data">
+    <form  class="container-fluid" method="POST" enctype="multipart/form-data">
         {% csrf_token %}
 
         <div class="container">
@@ -49,7 +49,8 @@
         <p>File uploaded at: <a href="{{ uploaded_file_url }}">{{ uploaded_file_url }}</a></p>
     {%  endif %}
 
-<script type="text/javascript" src="{% static 'js/features.js' %}"></script>
+
+
 </body>
 
 </html>
