@@ -4,7 +4,7 @@ html, body {
     height:100%;}
 
 @media screen and (max-device-width: 599px ) {
-.img-fluid {maxgit co-width: 5%; }}
+.img-fluid {max-width: 5%; }}
 
 .container {
     display: flex;
