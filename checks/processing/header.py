@@ -23,13 +23,16 @@ class XLdocument:
             self.header.append(cell.value)  # записали ячейку с датой
 
         # обработка файла
-        for row in range(6, self.ws.nrows):  # диапазон с 7 строки
+        for row in range(6, self.ws.nrows-7):  # диапазон с 7 строки
             rec = []
             for col in range(0, self.ws.ncols):
                 cell = self.ws.cell(row, col)  # прочитали ячейку
                 rec.append(cell.value)  # записали ячейку в массив строки
 
             saveList.append(rec)  # записали очередную строку в массив счета
+
+            if len(rec[0]) - len(rec[0].strip()) == 0:
+                saveList.pop(0)
 
             if rec[0].lower().startswith('expenses'):  # если начались "расходы", меняем флаг
                 self.flag = 1
@@ -40,10 +43,11 @@ class XLdocument:
                 saveList = []
 
             if rec[0].strip().lower().startswith('total'):  # если строка итоговая - записываем
-               if len(rec[0].lower())-len(rec[0].strip().lower())<6: # не берем третий уровень иерархии
-                    if rec[-1] >= self.mat and len(saveList) > 1:  # сравниваем последний столбец с материальностью, и что счет записан
-                        self.create_account(saveList, '{}'.format(row))
+                if len(rec[0]) - len(rec[0].strip()) < 6:  # не берем третий уровень иерархии-считаем кол-во отступов
+                    if rec[-1] >= self.mat and len(saveList) > 1:   # сравниваем последний столбец с материальностью, и что счет записан
+                        self.create_account(saveList, '{}'.format(row+1))
                     saveList = []
+
 
         if self.wbout is not None:
             self.wbout.close()

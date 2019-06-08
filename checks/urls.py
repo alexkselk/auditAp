@@ -13,4 +13,4 @@ urlpatterns = [
     path('check/<int:pk>/edit/', views.check_edit, name="check_edit"),
 
     path('direct_file', views.direct_file, name="direct_file")
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

@@ -4,8 +4,7 @@
     {% load staticfiles %}
     {% load static %}
 
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="{% static 'style/mystyle.css' %}"> <!-- нужен ли? -->
 
@@ -13,45 +12,74 @@
     <meta charset="UTF-8">
     <title>Assessor's helper</title>
 
+
+
 </head>
 
 <body>
-    <div class="container-fluid ">
-        <div class="row">
-            <div class="col-sm-2">
-                <img src="{% static 'images/suai.png' %}" id="logo" class="img-fluid" style="max-width: 100px;" alt="face">
-            </div>
-            <div class="col-sm-10">
-                <br><br>
-                <h2>Auditor's helper</h2>
-            </div>
+    <div class="">
+        <div class="header">
+            <img src="{% static 'images/suai.png' %}" id="logo" class="img-fluid" style="max-width: 100px;" alt="face">
+
+
+                <h1>Auditor's helper</h1>
         </div>
     </div>
     <hr>
 
 
-    <form  class="container-fluid" method="POST" enctype="multipart/form-data">
+    <form  class="excel_input" method="POST" enctype="multipart/form-data">
         {% csrf_token %}
 
-        <div class="container">
-            <div class="custom-file">
-                <input type="file" class="custom-file-input" id="inputGroupFile01" name="upload">
-                <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
-            </div>
+        <h2>File:</h2>
+        <div class="input-container">
 
-            <button class="btn btn-outline-primary" type="submit">Upload</button>
+
+                <input type="file" class="" id="real-input" name="upload">
+                    <div class="btn browse-btn">
+                        Browse Files
+                    </div>
+                    <span class="file-info">Upload a file</span>
+{#                <label class="custom-file-label" for="inputGroupFile01">Choose file</label>#}
         </div>
+        <h2>Materiality: <input type="number" name="materiality" value="500000"/></h2>
+        <br/>
+        <button class="btn upload-btn" type="submit">Upload and check</button>
     </form>
 
+    <div class="res_out">
+        {%  if uploaded_file_url %}
+    {#        Name: {{ name }} <br/>#}
+            <h2>Results:</h2>
+            <p>Original file: <a href="{{ uploaded_file_url }}">{{ uploaded_file_url }}</a><br/>
+            Profit file: <a href="{{ profit_url }}">{{ profit_url }}</a><br/>
+            Loss file: <a href="{{ loss_url }}">{{ loss_url }}</a></p>
+        {%  endif %}
 
-    {%  if uploaded_file_url %}
-        Name: {{ name }} <br/>
-        <p>File uploaded at: <a href="{{ uploaded_file_url }}">{{ uploaded_file_url }}</a></p>
-    {%  endif %}
+        {% if upload_error %}
+            <p><h2>Error occurred:</h2> {{ upload_error }}</p>
+        {% endif %}
+    </div>
 
 
 
 </body>
 
+<script>
+        const uploadButton = document.querySelector('.browse-btn');
+        const fileInfo = document.querySelector('.file-info');
+        const realInput = document.getElementById('real-input');
+
+        uploadButton.addEventListener('click', (e) => {
+            realInput.click();
+        });
+
+        realInput.addEventListener('change', () => {
+            const name = realInput.value.split(/\\|\//).pop();
+            const truncated = name;
+
+            fileInfo.innerHTML = truncated;
+        });
+    </script>
 </html>
 
